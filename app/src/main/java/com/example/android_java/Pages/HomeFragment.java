@@ -22,6 +22,8 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -68,15 +70,17 @@ public class HomeFragment extends Fragment {
 
     private void initData() {
         items = new ArrayList<>();
-        title = new ArrayList<>();
-        tags = new ArrayList<>();
+        title = Arrays.asList("想法", "关注", "推荐", "热榜");
+        tags = new ArrayList<>(Arrays.asList("动漫", "国际", "考研", "宠物", "家居", "青岛", "竞赛"));
         fragments = new ArrayList<>();
-        for (int i = 0; i < 6; i ++ ) {
-            items.add(new HomePageRecommendedNewsItem("问题名" + i, "问题的具体内容"));
-            title.add("问题名"  + i);
-            tags.add("类别" + i);
+
+        for (int i = 0; i < 5; i ++ ) {
+            items.add(new HomePageRecommendedNewsItem("问题名" + i,
+                    "问题的具体内容题的具体内容题的具体内容题的具体内容" +
+                            "问题的具体内容题的具体内容题的具体内容题的具体内容" +
+                            "问题的具体内容题的具体内容题的具体内容题的具体内容"));
         }
-        for (int i = 0; i < 6; i ++ ) {
+        for (int i = 0; i < title.size(); i ++ ) {
             Fragment fragment = new RecommendedFragment(items, tags);
             fragments.add(fragment);
         }

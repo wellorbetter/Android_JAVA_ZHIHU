@@ -42,8 +42,7 @@ public class RecommendedFragment extends Fragment {
     }
 
     public static RecommendedFragment newInstance(List<HomePageRecommendedNewsItem> items, List<String> tags) {
-        RecommendedFragment fragment = new RecommendedFragment(items, tags);
-        return fragment;
+        return new RecommendedFragment(items, tags);
     }
 
     @Override

@@ -12,5 +12,6 @@
         android:layout_width="match_parent"
         android:textSize="24sp"
         android:id="@+id/tv_home_questionDetail"
+        android:maxLines="2"
         android:layout_height="wrap_content"/>
 </LinearLayout>
