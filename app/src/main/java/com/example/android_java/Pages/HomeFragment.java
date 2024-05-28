@@ -12,9 +12,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.example.android_java.Adapter.Home.HomeFragmentVPAdapter;
+import com.example.android_java.Adapter.Home.HomeVPAdapter;
 import com.example.android_java.Bean.HomePage.HomePageRecommendedNewsItem;
 import com.example.android_java.Pages.Home.RecommendedFragment;
 import com.example.android_java.R;
@@ -38,6 +37,8 @@ public class HomeFragment extends Fragment {
     private List<HomePageRecommendedNewsItem> items;
     private List<String> title;
     private List<Fragment> fragments;
+    private List<String> tags;
+
     public HomeFragment() {
 
     }
@@ -68,13 +69,15 @@ public class HomeFragment extends Fragment {
     private void initData() {
         items = new ArrayList<>();
         title = new ArrayList<>();
+        tags = new ArrayList<>();
         fragments = new ArrayList<>();
         for (int i = 0; i < 6; i ++ ) {
             items.add(new HomePageRecommendedNewsItem("问题名" + i, "问题的具体内容"));
             title.add("问题名"  + i);
+            tags.add("类别" + i);
         }
         for (int i = 0; i < 6; i ++ ) {
-            Fragment fragment = new RecommendedFragment(items);
+            Fragment fragment = new RecommendedFragment(items, tags);
             fragments.add(fragment);
         }
     }
@@ -85,7 +88,7 @@ public class HomeFragment extends Fragment {
         FragmentManager manager = getChildFragmentManager();
         Lifecycle lifecycle = getLifecycle();
 
-        HomeFragmentVPAdapter adapter = new HomeFragmentVPAdapter(manager, lifecycle, fragments);
+        HomeVPAdapter adapter = new HomeVPAdapter(manager, lifecycle, fragments);
         vp_home.setAdapter(adapter);
         TabLayoutMediator mediator = new TabLayoutMediator(tb_home, vp_home, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override

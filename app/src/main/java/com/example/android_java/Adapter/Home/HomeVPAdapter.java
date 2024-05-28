@@ -9,11 +9,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import java.util.List;
 
 /* 用来适配新闻Fragment内部，不同分区Fragment的切换 */
-public class HomeFragmentVPAdapter extends FragmentStateAdapter {
+public class HomeVPAdapter extends FragmentStateAdapter {
 
     List<Fragment> mFragment;
 
-    public HomeFragmentVPAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> mFragment) {
+    public HomeVPAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> mFragment) {
         super(fragmentManager, lifecycle);
         this.mFragment = mFragment;
     }

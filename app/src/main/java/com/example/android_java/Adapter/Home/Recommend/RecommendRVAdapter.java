@@ -1,4 +1,4 @@
-package com.example.android_java.Adapter.Home;
+package com.example.android_java.Adapter.Home.Recommend;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,10 +14,10 @@ import com.example.android_java.R;
 import java.util.List;
 
 /* 用来适配新闻数据和新闻Fragment的适配器 */
-public class HomeFragmentRVAdapter extends RecyclerView.Adapter<HomeFragmentRVAdapter.ViewHolder> {
+public class RecommendRVAdapter extends RecyclerView.Adapter<RecommendRVAdapter.ViewHolder> {
     private final List<HomePageRecommendedNewsItem> items;
 
-    public HomeFragmentRVAdapter(List<HomePageRecommendedNewsItem> items) {
+    public RecommendRVAdapter(List<HomePageRecommendedNewsItem> items) {
         this.items = items;
     }
 
