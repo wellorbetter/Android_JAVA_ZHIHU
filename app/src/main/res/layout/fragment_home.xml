@@ -7,19 +7,17 @@
     android:orientation="vertical"
     tools:context=".Activities.MainActivity">
 
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:id="@+id/tb_home"
+        app:tabMode="scrollable"
+        android:layout_height="wrap_content"/>
+
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vp_main"
+        android:id="@+id/vp_home"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
         android:layout_weight="1"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bt_main"
-        android:layout_width="wrap_content"
-        app:menu="@menu/home_bottom"
-        app:labelVisibilityMode="labeled"
-        android:layout_gravity="bottom"
-        android:layout_height="wrap_content"/>
 </LinearLayout>
