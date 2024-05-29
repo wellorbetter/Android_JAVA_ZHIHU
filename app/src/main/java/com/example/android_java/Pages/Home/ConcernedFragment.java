@@ -10,40 +10,23 @@ import android.view.ViewGroup;
 
 import com.example.android_java.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ConcernedFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+// 关注页面实际上和推荐页面差不多，只不过多了一些细节
+// 比如头像更大，有名字，回答的时间，然后这里还有什么什么为你推荐
+// 所以这两页用的数据的格式应该是一样的
+
+// 右上角有关注
+// 最上面有自己关注的人的头像排列
+// 下面一点有三个tab 精选 最新 想法
 public class ConcernedFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public ConcernedFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ConcernedFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ConcernedFragment newInstance(String param1, String param2) {
         ConcernedFragment fragment = new ConcernedFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,8 +35,7 @@ public class ConcernedFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 

@@ -3,6 +3,15 @@ package com.example.android_java.Bean.HomePage;
 public class HomePageRecommendedNewsItem {
     private String questionName;
     private String questionDetail;
+    private String questionId;  // 问题的id
+    private String answerId;   // 回答的id
+    private String answererId;  // 回答者的id
+    private String answererName;  // 回答者的名字
+    private String answererAvatar;
+    private int retransmissionCount;
+    private int collectionCount;
+    private int commentCount;
+    private boolean isSubscribe; // 是否关注
 
     public HomePageRecommendedNewsItem(String questionName, String questionDetail) {
         this.questionName = questionName;

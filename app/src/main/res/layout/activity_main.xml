@@ -18,7 +18,8 @@
         android:id="@+id/bt_main"
         android:layout_width="wrap_content"
         app:menu="@menu/home_bottom"
-        app:labelVisibilityMode="labeled"
+        android:background="@color/white"
+        app:labelVisibilityMode="unlabeled"
         android:layout_gravity="bottom"
         android:layout_height="wrap_content"/>
 </LinearLayout>
