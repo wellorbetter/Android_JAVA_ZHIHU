@@ -11,7 +11,7 @@ ViewPager2+BottomNavigationView+Fragment+TabLayout+Fragment+ViewPager2嵌套 (�
 完成推荐页面：
 推荐页面里面还要嵌套TabLayout+ViewPager2+Fragment，绕晕了(静态页面)
 
-![image-20240529155904174](C:\Users\wellorbetter\AppData\Roaming\Typora\typora-user-images\image-20240529155904174.png)
+![推荐页面](https://github.com/wellorbetter/picx-images-hosting/raw/master/image-20240529155904174.45hi6eakpx.webp)
 
 但是存在bug，不过现在没有写数据库，也还行，等以后改(切换fragment的时候会出现空指针，应该是重用的时候出错了)
 
@@ -23,6 +23,6 @@ ViewPager2+BottomNavigationView+Fragment+TabLayout+Fragment+ViewPager2嵌套 (�
 完成部分注册页面：
 画UI实在是麻烦(静态页面)
 
-![image-20240529154718156](C:\Users\wellorbetter\AppData\Roaming\Typora\typora-user-images\image-20240529154718156.png)
+![注册页面](https://github.com/wellorbetter/picx-images-hosting/raw/master/image-20240529154718156.64dowqg31f.webp)
 
 虽然麻烦，但是画UI不需要动脑子，相对来说比较轻松
