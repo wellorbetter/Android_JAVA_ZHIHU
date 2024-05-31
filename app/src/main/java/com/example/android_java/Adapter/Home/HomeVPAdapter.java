@@ -12,12 +12,10 @@ import java.util.List;
 public class HomeVPAdapter extends FragmentStateAdapter {
 
     List<Fragment> mFragment;
-
     public HomeVPAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> mFragment) {
         super(fragmentManager, lifecycle);
         this.mFragment = mFragment;
     }
-
 
     @NonNull
     @Override
