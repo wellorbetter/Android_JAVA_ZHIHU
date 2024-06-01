@@ -1,14 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/rv_parent"
     tools:context=".Pages.DiscoverFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/rv_header"
+        android:layout_above="@id/rv_question_detail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="125dp">
 
-</FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rv_question_detail"
+        android:layout_width="match_parent"
+        android:layout_above="@id/rv_bottom"
+        android:layout_marginBottom="15dp"
+        android:layout_height="525dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="26sp"
+                android:text="发现"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp">
+                <TextView
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:text="从一个问题开始"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="175dp"
+                    android:background="#4DBDA1EF"
+                    android:layout_height="18dp"/>
+            </RelativeLayout>
+            <TextView
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:text="你可以选择以下问题或者直接输入"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ListView
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/lv_detail"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_width="125dp"
+                    android:layout_height="25dp">
+                    <ImageView
+                        android:layout_gravity="left"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+<!--                    存在一定的bug-->
+                    <TextView
+                        android:layout_gravity="right"
+                        android:layout_width="100dp"
+                        android:gravity="center"
+                        android:text="换一换"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+            </LinearLayout>
+            </LinearLayout>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rv_bottom"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="100dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginRight="8dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:text="知乎智慧图谱"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/search_frame"
+                android:layout_weight="1">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColorHint="#B68DDD"
+                    android:hint="输入你想问的..."
+                    android:background="@color/transparent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

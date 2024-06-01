@@ -26,3 +26,11 @@ ViewPager2+BottomNavigationView+Fragment+TabLayout+Fragment+ViewPager2嵌套 (�
 ![注册页面](https://github.com/wellorbetter/picx-images-hosting/raw/master/image-20240529154718156.64dowqg31f.webp)
 
 虽然麻烦，但是画UI不需要动脑子，相对来说比较轻松
+
+#### Day5：
+
+UI绘画确实不怎么需要脑子，绘制搜索页面，中间写的是ListView，因为是wrap_content所以这里就被撑开了，下面有个按钮就隐藏了，哪天填个数据撑开就可以了(闲置小于等于四条)
+
+![搜索页面](https://github.com/wellorbetter/picx-images-hosting/raw/master/image.45hi7imxq2.webp)
+
+这个页面还有输入之后，还有其他的，算完成部分
