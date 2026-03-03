@@ -23,3 +23,12 @@ TOKEN=$(curl -s -X POST http://localhost:8080/v1/auth/login | sed -n 's/.*"acces
 curl -s -H "Authorization: Bearer $TOKEN" http://localhost:8080/v1/feed/recommend
 curl -s -H "Authorization: Bearer $TOKEN" http://localhost:8080/v1/topics
 ```
+
+
+## 爬虫种子
+先运行：
+```bash
+python3 crawler/fetch_programmer_seed.py
+```
+
+后端会优先读取 `crawler/data/programmer_seed.json`。

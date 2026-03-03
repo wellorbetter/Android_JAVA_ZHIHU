@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zhihu Clone Web Demo</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 860px; margin: 24px auto; }
+    button { margin-right: 8px; margin-bottom: 8px; }
+    pre { background: #f5f5f5; padding: 12px; border-radius: 8px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>跨端 Web Demo（联调后端）</h1>
+  <p>后端默认地址：<code>http://localhost:8080</code></p>
+
+  <button id="login">1. 登录</button>
+  <button id="feed">2. 拉推荐</button>
+  <button id="topics">3. 拉分区</button>
+  <button id="seed">4. 拉爬虫种子</button>
+
+  <pre id="output">等待操作...</pre>
+
+  <script>
+    const base = 'http://localhost:8080';
+    let token = '';
+    const output = document.getElementById('output');
+
+    async function call(path, opts = {}) {
+      const headers = opts.headers || {};
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+      const resp = await fetch(base + path, { ...opts, headers });
+      const text = await resp.text();
+      output.textContent = `[${resp.status}] ${path}\n` + text;
+      return JSON.parse(text);
+    }
+
+    document.getElementById('login').onclick = async () => {
+      const data = await call('/v1/auth/login', { method: 'POST' });
+      token = data?.data?.accessToken || '';
+    };
+
+    document.getElementById('feed').onclick = () => call('/v1/feed/recommend');
+    document.getElementById('topics').onclick = () => call('/v1/topics');
+    document.getElementById('seed').onclick = () => call('/v1/crawler/seed');
+  </script>
+</body>
+</html>

@@ -20,12 +20,14 @@ public class BackendServer {
         AuthService authService = new AuthService(sessionStore);
         FeedService feedService = new FeedService();
         TopicService topicService = new TopicService();
+        CrawlerSeedService crawlerSeedService = new CrawlerSeedService();
 
         server.createContext("/v1/auth/login", new AuthHandler(authService));
         server.createContext("/v1/auth/logout", new AuthHandler(authService));
         server.createContext("/v1/feed/recommend", new ProtectedHandler(authService, feedService::recommendJson));
         server.createContext("/v1/feed/following", new ProtectedHandler(authService, feedService::followingJson));
         server.createContext("/v1/topics", new ProtectedHandler(authService, topicService::topicsJson));
+        server.createContext("/v1/crawler/seed", new ProtectedHandler(authService, crawlerSeedService::seedJson));
 
         server.setExecutor(null);
         server.start();
