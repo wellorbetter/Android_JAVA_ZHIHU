@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Android_JAVA"
 include(":app")
+include(":shared")
  

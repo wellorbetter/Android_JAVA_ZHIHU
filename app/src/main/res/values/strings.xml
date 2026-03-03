@@ -29,4 +29,24 @@
     <string name="session_status">私密模式：%1$s ｜ 会话状态：%2$s ｜ Token：%3$s</string>
     <string name="token_status_empty">未就绪</string>
     <string name="token_status_ready">已就绪</string>
+    <string name="issue_title">发布技术内容</string>
+    <string name="issue_hint_title">输入标题，例如：KMP跨端实践</string>
+    <string name="issue_hint_summary">输入内容摘要，支持简要技术观点</string>
+    <string name="issue_publish">发布</string>
+    <string name="issue_publish_success">发布成功</string>
+    <string name="issue_publish_failed">发布失败，请先登录并检查后端</string>
+    <string name="session_login_success">登录成功</string>
+    <string name="session_login_failed">登录失败，请检查后端服务</string>
+    <string name="session_logout_done">已退出</string>
+    <string name="comments_title">评论区</string>
+    <string name="comments_input_hint">写下你的评论…</string>
+    <string name="comments_send">发送</string>
+    <string name="comments_delete_latest">删除我的最新评论</string>
+    <string name="comments_load_failed">评论加载失败</string>
+    <string name="comments_empty">评论不能为空</string>
+    <string name="comments_send_success">评论成功</string>
+    <string name="comments_send_failed">评论失败</string>
+    <string name="comments_delete_success">删除成功</string>
+    <string name="comments_delete_failed">暂无可删除评论</string>
+    <string name="comments_load_more">加载更多评论</string>
 </resources>

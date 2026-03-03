@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,19 +14,30 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.android_java.Core.AppContainer;
+import com.example.android_java.Core.Network.ApiClientProvider;
 import com.example.android_java.Core.Session.SessionRepository;
+import com.example.android_java.Data.Model.ApiResponse;
+import com.example.android_java.Feature.Auth.AuthApi;
+import com.example.android_java.Feature.Auth.AuthDtos;
 import com.example.android_java.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PersonalFragment extends Fragment {
 
     private TextView sessionStatusText;
     private SwitchCompat privateModeSwitch;
     private SessionRepository sessionRepository;
+    private AuthApi authApi;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sessionRepository = AppContainer.sessionRepository(requireContext());
+        ApiClientProvider apiClientProvider = AppContainer.apiClientProvider(requireContext());
+        authApi = apiClientProvider.create(AuthApi.class);
     }
 
     @Override
@@ -50,14 +62,45 @@ public class PersonalFragment extends Fragment {
         });
 
         loginButton.setOnClickListener(v -> {
-            sessionRepository.setLoggedIn(true);
-            sessionRepository.setAccessToken("mock_access_token_for_android_client");
-            renderSessionStatus();
+            AuthDtos.LoginRequest request = new AuthDtos.LoginRequest();
+            request.mobile = "android_user";
+            request.password = "";
+            authApi.login(request).enqueue(new Callback<ApiResponse<AuthDtos.LoginData>>() {
+                @Override
+                public void onResponse(Call<ApiResponse<AuthDtos.LoginData>> call, Response<ApiResponse<AuthDtos.LoginData>> response) {
+                    if (!response.isSuccessful() || response.body() == null || response.body().getData() == null) {
+                        Toast.makeText(requireContext(), R.string.session_login_failed, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    sessionRepository.setLoggedIn(true);
+                    sessionRepository.setAccessToken(response.body().getData().accessToken);
+                    renderSessionStatus();
+                    Toast.makeText(requireContext(), R.string.session_login_success, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<ApiResponse<AuthDtos.LoginData>> call, Throwable t) {
+                    Toast.makeText(requireContext(), R.string.session_login_failed, Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
         logoutButton.setOnClickListener(v -> {
-            sessionRepository.clearSession();
-            renderSessionStatus();
+            authApi.logout().enqueue(new Callback<ApiResponse<Object>>() {
+                @Override
+                public void onResponse(Call<ApiResponse<Object>> call, Response<ApiResponse<Object>> response) {
+                    sessionRepository.clearSession();
+                    renderSessionStatus();
+                    Toast.makeText(requireContext(), R.string.session_logout_done, Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<ApiResponse<Object>> call, Throwable t) {
+                    sessionRepository.clearSession();
+                    renderSessionStatus();
+                    Toast.makeText(requireContext(), R.string.session_logout_done, Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
         renderSessionStatus();

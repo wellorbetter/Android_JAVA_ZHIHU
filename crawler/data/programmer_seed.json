@@ -1,5 +1,6 @@
 {
-  "fetchedAt": 1772541460,
+  "schemaVersion": 2,
+  "fetchedAt": 1772555070,
   "count": 2,
   "items": [
     {
@@ -7,14 +8,18 @@
       "title": "Java 微服务如何做链路追踪？",
       "url": "https://example.com/java-tracing",
       "publishedAt": "",
-      "summary": "OpenTelemetry + SkyWalking 的落地路径"
+      "summary": "OpenTelemetry + SkyWalking 的落地路径",
+      "topicName": "Backend",
+      "authorName": "fallback"
     },
     {
       "source": "fallback",
       "title": "Android 启动优化 Checklist",
       "url": "https://example.com/android-startup",
       "publishedAt": "",
-      "summary": "冷启动指标、主线程治理、IO 预加载"
+      "summary": "冷启动指标、主线程治理、IO 预加载",
+      "topicName": "Android",
+      "authorName": "fallback"
     }
   ]
 }

@@ -20,8 +20,10 @@ public class HomeVPAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-
-        return mFragment == null ? null : mFragment.get(position);
+        if (mFragment == null || mFragment.isEmpty()) {
+            throw new IllegalStateException("HomeVPAdapter fragments is empty");
+        }
+        return mFragment.get(position);
     }
 
     @Override

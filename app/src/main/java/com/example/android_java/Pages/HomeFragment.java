@@ -14,16 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android_java.Adapter.Home.HomeVPAdapter;
-import com.example.android_java.Bean.HomePage.HomePageRecommendedNewsItem;
+import com.example.android_java.Feature.Home.HomeRefreshBus;
 import com.example.android_java.Pages.Home.RecommendedFragment;
 import com.example.android_java.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,11 +33,9 @@ public class HomeFragment extends Fragment {
 
     private ViewPager2 vp_home;
     private TabLayout tb_home;
-    private BottomNavigationView bt_home;
-    private List<HomePageRecommendedNewsItem> items;
     private List<String> title;
     private List<Fragment> fragments;
-    private List<String> tags;
+    private static final int RECOMMEND_TAB_INDEX = 2;
 
     public HomeFragment() {
 
@@ -69,19 +65,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void initData() {
-        items = new ArrayList<>();
         title = Arrays.asList("想法", "关注", "推荐", "热榜");
-        tags = new ArrayList<>(Arrays.asList("动漫", "国际", "考研", "宠物", "家居", "青岛", "竞赛"));
+        List<String> feedChannels = Arrays.asList("idea", "following", "recommend", "hot");
         fragments = new ArrayList<>();
 
-        for (int i = 0; i < 5; i ++ ) {
-            items.add(new HomePageRecommendedNewsItem("问题名" + i,
-                    "问题的具体内容题的具体内容题的具体内容题的具体内容" +
-                            "问题的具体内容题的具体内容题的具体内容题的具体内容" +
-                            "问题的具体内容题的具体内容题的具体内容题的具体内容"));
-        }
         for (int i = 0; i < title.size(); i ++ ) {
-            Fragment fragment = new RecommendedFragment(items, tags);
+            Fragment fragment = RecommendedFragment.newInstance(feedChannels.get(i));
             fragments.add(fragment);
         }
     }
@@ -101,6 +90,24 @@ public class HomeFragment extends Fragment {
             }
         });
         mediator.attach();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        HomeRefreshBus.RefreshPayload payload = HomeRefreshBus.consume();
+        if (payload == null || payload.topic == null || payload.topic.isEmpty()) {
+            return;
+        }
+        if (vp_home != null) {
+            vp_home.setCurrentItem(RECOMMEND_TAB_INDEX, false);
+        }
+        if (fragments != null && fragments.size() > RECOMMEND_TAB_INDEX) {
+            Fragment fragment = fragments.get(RECOMMEND_TAB_INDEX);
+            if (fragment instanceof RecommendedFragment) {
+                ((RecommendedFragment) fragment).requestRefreshWithTopic(payload.topic, payload.contentId);
+            }
+        }
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

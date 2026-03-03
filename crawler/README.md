@@ -9,3 +9,12 @@ python3 crawler/fetch_programmer_seed.py
 ```
 
 输出：`crawler/data/programmer_seed.json`
+
+## 数据字段（schemaVersion=2）
+- `source`
+- `title`
+- `url`
+- `publishedAt`
+- `summary`
+- `topicName`（Android/iOS/Web/Backend/AI）
+- `authorName`

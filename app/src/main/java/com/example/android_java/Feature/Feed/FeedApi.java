@@ -9,8 +9,8 @@ import retrofit2.http.Query;
 public interface FeedApi {
 
     @GET("v1/feed/recommend")
-    Call<ApiResponse<FeedDtos.FeedPage>> recommend(@Query("cursor") String cursor);
+    Call<ApiResponse<FeedDtos.FeedPage>> recommend(@Query("cursor") String cursor, @Query("topic") String topic);
 
     @GET("v1/feed/following")
-    Call<ApiResponse<FeedDtos.FeedPage>> following(@Query("cursor") String cursor);
+    Call<ApiResponse<FeedDtos.FeedPage>> following(@Query("cursor") String cursor, @Query("topic") String topic);
 }

@@ -1,24 +1,28 @@
 package com.example.zhihu.backend.model;
 
-import java.util.Set;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SessionStore {
-    private final Set<String> validTokens = ConcurrentHashMap.newKeySet();
+    private final Map<String, String> tokenToUser = new ConcurrentHashMap<>();
 
     public String createToken(String mobile) {
         String token = "token_" + mobile + "_" + System.currentTimeMillis();
-        validTokens.add(token);
+        tokenToUser.put(token, mobile);
         return token;
     }
 
     public boolean isValid(String token) {
-        return token != null && validTokens.contains(token);
+        return token != null && tokenToUser.containsKey(token);
+    }
+
+    public String userOf(String token) {
+        return tokenToUser.get(token);
     }
 
     public void revoke(String token) {
         if (token != null) {
-            validTokens.remove(token);
+            tokenToUser.remove(token);
         }
     }
 }

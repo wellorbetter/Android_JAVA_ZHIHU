@@ -21,4 +21,9 @@ public class AuthService {
     public boolean isAuthorized(String token) {
         return sessionStore.isValid(token);
     }
+
+    public String userOf(String token) {
+        String user = sessionStore.userOf(token);
+        return user == null || user.isEmpty() ? "guest" : user;
+    }
 }

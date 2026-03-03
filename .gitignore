@@ -13,3 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
+backend/data/content_store.tsv
+backend/data/comment_store.tsv
+backend/out
+backend/out_check

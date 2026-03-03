@@ -7,13 +7,18 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ProtectedHandler implements HttpHandler {
     private final AuthService authService;
-    private final Supplier<String> jsonDataSupplier;
+    private final Function<HttpExchange, String> jsonDataSupplier;
 
     public ProtectedHandler(AuthService authService, Supplier<String> jsonDataSupplier) {
+        this(authService, exchange -> jsonDataSupplier.get());
+    }
+
+    public ProtectedHandler(AuthService authService, Function<HttpExchange, String> jsonDataSupplier) {
         this.authService = authService;
         this.jsonDataSupplier = jsonDataSupplier;
     }
@@ -32,7 +37,7 @@ public class ProtectedHandler implements HttpHandler {
             return;
         }
 
-        String body = JsonResponse.success(jsonDataSupplier.get());
+        String body = JsonResponse.success(jsonDataSupplier.apply(exchange));
         writeJson(exchange, 200, body);
     }
 
