@@ -16,7 +16,6 @@ cd backend
 - `GET /v1/feed/recommend`（需要 Bearer token）
 - `GET /v1/feed/following`（需要 Bearer token）
 - `GET /v1/topics`（需要 Bearer token）
-- `GET /v1/crawler/seed`（需要 Bearer token，返回爬虫种子）
 
 ## 快速验证
 ```bash
