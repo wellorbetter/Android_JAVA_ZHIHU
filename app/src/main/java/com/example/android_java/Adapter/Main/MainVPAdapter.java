@@ -9,8 +9,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import java.util.List;
 
 public class MainVPAdapter extends FragmentStateAdapter {
-    List<Fragment> fragments;
-    public MainVPAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, List<Fragment> fragments) {
+    private final List<Fragment> fragments;
+
+    public MainVPAdapter(@NonNull FragmentManager fragmentManager,
+                         @NonNull Lifecycle lifecycle,
+                         @NonNull List<Fragment> fragments) {
         super(fragmentManager, lifecycle);
         this.fragments = fragments;
     }
@@ -18,11 +21,14 @@ public class MainVPAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return fragments == null ? null : fragments.get(position);
+        if (position < 0 || position >= fragments.size()) {
+            throw new IllegalArgumentException("Invalid position: " + position);
+        }
+        return fragments.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return fragments == null ? 0 : fragments.size();
+        return fragments.size();
     }
 }
