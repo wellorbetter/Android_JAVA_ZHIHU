@@ -1,66 +1,81 @@
 package com.example.android_java.Pages;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
+
+import com.example.android_java.Core.AppContainer;
+import com.example.android_java.Core.Session.SessionRepository;
 import com.example.android_java.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PersonalFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class PersonalFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public PersonalFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PersonalFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PersonalFragment newInstance(String param1, String param2) {
-        PersonalFragment fragment = new PersonalFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private TextView sessionStatusText;
+    private SwitchCompat privateModeSwitch;
+    private SessionRepository sessionRepository;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        sessionRepository = AppContainer.sessionRepository(requireContext());
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_personal, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        sessionStatusText = view.findViewById(R.id.tv_session_status);
+        privateModeSwitch = view.findViewById(R.id.switch_private_mode);
+        Button loginButton = view.findViewById(R.id.bt_login);
+        Button logoutButton = view.findViewById(R.id.bt_logout);
+
+        privateModeSwitch.setChecked(sessionRepository.isPrivateModeEnabled());
+
+        privateModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            sessionRepository.setPrivateModeEnabled(isChecked);
+            renderSessionStatus();
+        });
+
+        loginButton.setOnClickListener(v -> {
+            sessionRepository.setLoggedIn(true);
+            sessionRepository.setAccessToken("mock_access_token_for_android_client");
+            renderSessionStatus();
+        });
+
+        logoutButton.setOnClickListener(v -> {
+            sessionRepository.clearSession();
+            renderSessionStatus();
+        });
+
+        renderSessionStatus();
+    }
+
+    private void renderSessionStatus() {
+        String mode = sessionRepository.isPrivateModeEnabled()
+                ? getString(R.string.private_mode_on)
+                : getString(R.string.private_mode_off);
+
+        String auth = sessionRepository.isLoggedIn()
+                ? getString(R.string.user_logged_in)
+                : getString(R.string.user_not_logged_in);
+
+        String tokenStatus = sessionRepository.getAccessToken().isEmpty()
+                ? getString(R.string.token_status_empty)
+                : getString(R.string.token_status_ready);
+
+        sessionStatusText.setText(getString(R.string.session_status, mode, auth, tokenStatus));
     }
 }

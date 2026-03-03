@@ -17,4 +17,16 @@
     <string name="login_string_7">我已阅读并同意</string>
     <string name="login_string_8">《知乎协议》</string>
     <string name="login_string_9">《个人信息保护指引》</string>
+    <string name="privacy_center">隐私与访问控制</string>
+    <string name="private_mode_switch">开启 Private 模式（未登录不可访问首页/发现/发布/盐选）</string>
+    <string name="mock_login">模拟登录</string>
+    <string name="mock_logout">退出登录</string>
+    <string name="private_mode_tips">当前为 Private 模式，请先登录</string>
+    <string name="private_mode_on">开启</string>
+    <string name="private_mode_off">关闭</string>
+    <string name="user_logged_in">已登录</string>
+    <string name="user_not_logged_in">未登录</string>
+    <string name="session_status">私密模式：%1$s ｜ 会话状态：%2$s ｜ Token：%3$s</string>
+    <string name="token_status_empty">未就绪</string>
+    <string name="token_status_ready">已就绪</string>
 </resources>
